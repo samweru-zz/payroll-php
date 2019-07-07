@@ -1,0 +1,33 @@
+@ns:App
+@import:Strukt\Router\Kernel as RouterKernel;
+@class:Loader
+@descr
+	Application Loader Class
+
+	WARNING: THIS FILE IS AUTO-GENERATED. 
+			   DO NOT ADD ANYTHING BECAUSE 
+			   IT WILL BE OVERWRITTEN
+
+	@author Moderator <pitsolu@gmail.com>
+@descr
+
+@param:private>app#Strukt\Application
+
+@method:__construct@param:router#RouterKernel=null
+@body
+$this->app = new \Strukt\Application($router);
+		%s
+
+@body
+@descr
+	
+	Constructor
+	
+	Initialize Strukt Framework
+@descr
+
+@method:getApp#Strukt\Application
+@body
+return $this->app;
+@body
+@descr:Getter for Strukt Application

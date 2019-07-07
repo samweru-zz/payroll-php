@@ -1,0 +1,9 @@
+@ns:Seed
+@import:Doctrine\DBAL\Connection
+@class:NameVer
+
+@method:public>up@param:conn#Connection
+@body://todo
+
+@method:public>down@param:conn#Connection
+@body://todo

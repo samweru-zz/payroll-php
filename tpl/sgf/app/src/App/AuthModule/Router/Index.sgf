@@ -1,0 +1,40 @@
+@ns:__APP__\AuthModule\Router
+@import:Strukt\Http\Request
+@import:Strukt\Http\Response
+@class:Index
+@inherit:\Strukt\Contract\Router
+
+@method:welcome
+@body:return "</b>Strukt Works!<b>";
+@descr:@Route:/
+@descr:@Method:GET
+
+@method:helloWorld
+@body:return self::htmlfile("public/static/index.html");
+@descr:@Route:/hello/world
+@descr:@Method:GET
+
+@method:helloTo@param:name|request#Request
+@body:return sprintf("<b>Hello %s!</b>", $name);
+@descr:@Route:/hello/{name:alpha}
+@descr:@Method:GET
+
+@method:getAllUsers
+@body:return $this->get("au.ctr.User")->getAll();
+@descr:@Route:/users/all
+@descr:@Permission:user_all
+@descr:@Method:GET
+
+@method:getUser@param:request#Request
+@body
+$id = $request->query->get("id");
+
+		return $this->get("au.ctr.User")->find($id);
+@body
+@descr:@Route:/user
+@descr:@Method:GET
+
+@method:testException
+@body:throw new \Exception("Whoops!");
+@descr:@Route:/test
+@descr:@Method:GET

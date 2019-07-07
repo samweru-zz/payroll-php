@@ -1,0 +1,7 @@
+composer.lock
+vendor/
+lib/App/Loader.php
+php_errors.log
+logs/
+bin/
+tasker.php

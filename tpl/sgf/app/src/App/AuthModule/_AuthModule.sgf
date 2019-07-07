@@ -1,0 +1,5 @@
+@ns:__APP__\AuthModule
+@class:__APP__AuthModule
+@inherit:\Strukt\Contract\Module
+
+@param:protected>alias="Au"

@@ -1,0 +1,43 @@
+{
+
+    "name": "strukt/do",
+    "description": "Strukt + Doctrine ORM Project",
+    "license": "MIT",
+    "type":"project",
+    "authors": [
+
+        {
+            "name": "Moderator",
+            "email": "pitsolu@gmail.com"
+        }
+    ],
+    "require": {
+
+        "php": ">=5.6.2",
+        "strukt/framework": "dev-master",
+        "doctrine/orm": "^2.5",
+        "monolog/monolog": "^1.23",
+        "doctrine/migrations": "^1.5",
+        "zendframework/zend-diactoros": "^1.7",
+        "psy/psysh": "^0.9.6",
+        "cobaia/monologdoctrine": "^1.0",
+        "portphp/spreadsheet": "^1.0@alpha",
+        "symfony/serializer": "^4.3",
+        "fzaninotto/faker": "^1.8"
+    },
+    "minimum-stability":"dev",
+    "prefer-stable":true,
+    "autoload": {
+
+        "psr-0": { "Strukt\\": "src/"}
+    },
+    "scripts": {
+
+        "post-create-project-cmd": [
+
+            "composer exec static",
+            "composer exec config-do",
+            "php -r 'mkdir(\"logs\"); file_put_contents(\"logs/sql.log\", \"\", FILE_APPEND | LOCK_EX); file_put_contents(\"logs/app.log\", \"\", FILE_APPEND | LOCK_EX);'"
+        ]
+    }
+}

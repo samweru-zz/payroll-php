@@ -1,0 +1,12 @@
+@ns:Schema\Migration
+@import:Doctrine\DBAL\Migrations\AbstractMigration
+@import:Doctrine\DBAL\Schema\Schema
+@class:Version__VER__
+@inherit:AbstractMigration
+@descr:Auto-generated Migration: Please modify to your needs!
+
+@method:public>up@param:schema#Schema
+@body:// this up() migration is auto-generated, please modify it to your needs
+
+@method:public>down@param:schema#Schema
+@body:// this up() migration is auto-generated, please modify it to your needs

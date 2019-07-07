@@ -1,0 +1,21 @@
+
+@ns:__APP__\AuthModule\Tests
+@import:Strukt\Core\Registry
+@import:PHPUnit\Framework\TestCase
+@class:UserTest
+@inherit:TestCase
+
+@method:setUp
+@body
+$this->core = Registry::getInstance()->get("core");
+@body
+
+@method:testDoAuthentication
+@body
+$username = "admin";
+		$password = "p@55w0rd";
+
+		$isSuccess = $this->core->get("au.ctr.User")->doAuthentication($username, $password);
+
+		$this->assertTrue($isSuccess);
+@body

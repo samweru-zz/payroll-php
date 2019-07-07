@@ -1,0 +1,11 @@
+@ns:__APP__\AuthModule\Form
+@class:User
+@inherit:\Strukt\Contract\Form
+
+@method:protected>validation
+@body
+$service = $this->getValidatorService();
+
+		$this->setMessage("username", $service->getNew($this->get("username"))->isNotEmpty());
+		$this->setMessage("password", $service->getNew($this->get("password"))->isNotEmpty());
+@body

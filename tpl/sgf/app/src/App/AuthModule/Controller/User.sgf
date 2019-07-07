@@ -1,0 +1,12 @@
+@ns:__APP__\AuthModule\Controller
+@class:User
+@inherit:\Strukt\Contract\Controller
+
+@method:find@param:id
+@body:return "Couldn't find User:[$id] - AuthModule\Controller\User::find Not Yet Implemented!";
+
+@method:getAll
+@body:return "AuthModule\Controller\User::getAll Not Yet Implemented!";
+
+@method:doAuthentication@param:username|password
+@body:return true;
