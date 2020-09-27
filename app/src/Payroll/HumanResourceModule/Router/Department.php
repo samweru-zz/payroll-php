@@ -36,13 +36,12 @@ class Department extends \Strukt\Contract\Router{
   */
   public function findAll(){
 
-     $depts = $this->get("hr.ctr.Department")->all();
+    $depts = $this->get("hr.ctr.Department")->all();
 
-     // return self::json(array("page"=>1,
-     //                    "rows"=>$lsDept,
-     //                    "total"=>count($lsDept)));
-
-     return self::json($depts);
+    foreach($depts as $dept)
+      $rsDepts[] = $dept->toArray();
+     
+     return self::json($rsDepts);
   }
 
   /**

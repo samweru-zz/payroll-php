@@ -10,9 +10,12 @@ class Relief extends \Strukt\Contract\Router{
 	*/
 	public function findAll(){
 
-		$relief = $this->get("hr.ctr.Relief")->findAll();
+		$relief_all = $this->get("pa.ctr.Relief")->all();
 
-		return self::json($relief->toArray());
+		foreach($relief_all as $relief)
+			$rsRelief[] = $relief->toArray();
+
+		return self::json($rsRelief);
 	}
 
 	/**
@@ -21,7 +24,7 @@ class Relief extends \Strukt\Contract\Router{
 	*/
 	public function find($id){
 
-		$relief = $this->get("hr.ctr.Relief")->getById($id);
+		$relief = $this->get("pa.ctr.Relief")->getById($id);
 
 		return self::json($relief->toArray());
 	}

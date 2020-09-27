@@ -1,12 +1,18 @@
-@ns:__APP__\AuthModule\Router
-@import:Strukt\Http\Request
-@import:Strukt\Http\Response
-@class:Auth
-@inherit:\Strukt\Contract\Router
+<?php
+namespace {{app}}\AuthModule\Router;
 
-@method:login@param:request#Request
-@body
-$username = $request->get("username");
+use Strukt\Http\Request;
+use Strukt\Http\Response;
+
+class Auth extends \Strukt\Contract\Router{
+
+	/**
+	* @Route(/login)
+	* @Method(POST)
+	*/
+	public function login(Request $request){
+
+		$username = $request->get("username");
 		$password = $request->get("password");
 
 		$userForm = $this->get("au.frm.User", [$request]);
@@ -32,6 +38,5 @@ $username = $request->get("username");
 		        "message"=>"Invalid input!",
 		        "form"=>$messages,
 		    ));
-@body
-@descr:@Route:/login
-@descr:@Method:POST
+	}
+}

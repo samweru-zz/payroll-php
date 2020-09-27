@@ -2,10 +2,7 @@
 
 namespace Payroll\PaymentModule\Router;
 
-use Payroll\PaymentModule\Controller\Paye as PayeC;
-use Payroll\PaymentModule\Transformer\Paye as PayeT;
-
-class Paye extends \App\Data\Router{
+class Paye extends \Strukt\Contract\Router{
 
 	/**
 	* @Route(/paye/all)
@@ -13,9 +10,12 @@ class Paye extends \App\Data\Router{
 	*/
 	public function findAll(){
 
-		$paye_all = $this->get("hr.ctr.Paye")->findAll();
+		$paye_all = $this->get("pa.ctr.Paye")->all();
 
-		return self::json($paye_all);
+		foreach($paye_all as $paye)
+			$rsPaye[] = $paye->toArray();
+
+		return self::json($rsPaye);
 	}
 
 	/**
@@ -24,7 +24,7 @@ class Paye extends \App\Data\Router{
 	*/
 	public function findOne($id){
 
-		$paye = $this->get("hr.ctr.Paye")->getById($id);
+		$paye = $this->get("pa.ctr.Paye")->getById($id);
 
 		return self::json($paye->toArray());
 	}

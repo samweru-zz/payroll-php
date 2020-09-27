@@ -13,6 +13,7 @@ class Employee extends \Strukt\Contract\Router{
   public function update(Request $request){
 
     $frmEmp = $this->get("hr.frm.Employee", [$request]);
+
     $msgs = $frmEmp->validate();
 
     return self::json($msgs);
@@ -24,20 +25,24 @@ class Employee extends \Strukt\Contract\Router{
   */
   public function findAll(Request $req){
 
-    $filter = array(
-
-      "name"=>$req->query->get("name")
-    );
-
     $page = $req->query->get("page");
     $rows = $req->query->get("rows");
+    $name = $req->query->get("name");
 
-    list($page, $pages, $rows, $no_items, $items) = $this->get("hr.ctr.Employee")
-                                                            ->pager($filter, $page, $rows);
+    $filter = [];
+    if(!empty($name))
+      $filter = array(
 
-    return self::json(array("page"=>$page,
-                              "rows"=>$items,
-                              "total"=>$rows));
+        "name"=>$name
+      );
+
+    $pager = $this->get("hr.ctr.Employee")->pager($filter, 1, 10);
+
+    return self::json([
+
+      "rows" => $pager["items"],
+      "count" => $pager["rows"]
+    ]);
   }
 
   /**
@@ -46,13 +51,8 @@ class Employee extends \Strukt\Contract\Router{
   */
   public function findOne($id){
 
-    $employee = EmployeeC::getById($id);
+    $employee = $this->get("hr.ctr.Employee")->getById($id);
 
-    $employee = self::get("normalizer")->apply($employee)->exec();
-
-     // $employee = EmployeeT::fromEntity();
-     // $employee["posts"] = PostC::ls();
-
-     return self::json($employee);
+    return self::json($employee->toArray());
   }
 }

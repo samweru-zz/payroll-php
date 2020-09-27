@@ -2,8 +2,6 @@
 
 namespace Payroll\HumanResourceModule\Controller;
 
-use Strukt\Util\Str;
-
 class Employee extends \Strukt\Contract\Controller{
 
 	public function all(){
@@ -22,10 +20,11 @@ class Employee extends \Strukt\Contract\Controller{
 
 	public function pager(Array $filter = [], $start_from, $page_size){
 
-		$qb = $this->da()->repo("Employee")->createQueryBuilder("e");
+		$qb = $this->em()->createQueryBuilder();
 
-		$qb->addSelect("p.name as title");
-		$qb->leftjoin("e.post", "p");
+		$qb->select('e.id, e.surname, e.othernames, p.name as post')
+			->from('Payroll\Employee', 'e')
+			->leftjoin("e.post", "p");
 
 		if(array_key_exists("name", $filter)){
 

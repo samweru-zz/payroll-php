@@ -1,40 +1,65 @@
-@ns:__APP__\AuthModule\Router
-@import:Strukt\Http\Request
-@import:Strukt\Http\Response
-@class:Index
-@inherit:\Strukt\Contract\Router
+<?php
+namespace {{app}}\AuthModule\Router;
 
-@method:welcome
-@body:return "</b>Strukt Works!<b>";
-@descr:@Route:/
-@descr:@Method:GET
+use Strukt\Http\Request;
+use Strukt\Http\Response;
 
-@method:helloWorld
-@body:return self::htmlfile("public/static/index.html");
-@descr:@Route:/hello/world
-@descr:@Method:GET
+class Index extends \Strukt\Contract\Router{
 
-@method:helloTo@param:name|request#Request
-@body:return sprintf("<b>Hello %s!</b>", $name);
-@descr:@Route:/hello/{name:alpha}
-@descr:@Method:GET
+	/**
+	* @Route(/)
+	* @Method(GET)
+	*/
+	public function welcome(){
+		
+		return "</b>Strukt Works!<b>";
+	}
 
-@method:getAllUsers
-@body:return $this->get("au.ctr.User")->getAll();
-@descr:@Route:/users/all
-@descr:@Permission:user_all
-@descr:@Method:GET
+	/**
+	* @Route(/hello/world)
+	* @Method(GET)
+	*/
+	public function helloWorld(){
 
-@method:getUser@param:request#Request
-@body
-$id = $request->query->get("id");
+		return self::htmlfile("public/static/index.html");
+	}
+	
+	/**
+	* @Route(/hello/{name:alpha})
+	* @Method(GET)
+	*/
+	public function helloTo($name, Request $request){
+
+		return sprintf("<b>Hello %s!</b>", $name);	
+	}
+
+	/**
+	* @Route(/users/all)
+	* @Permission(user_all)
+	* @Method(GET)
+	*/
+	public function getAllUsers(){
+		
+		return $this->get("au.ctr.User")->getAll();
+	}
+
+	/**
+	* @Route(/user)
+	* @Method(GET)
+	*/
+	public function getUser(Request $request){
+
+		$id = $request->query->get("id");
 
 		return $this->get("au.ctr.User")->find($id);
-@body
-@descr:@Route:/user
-@descr:@Method:GET
+	}
 
-@method:testException
-@body:throw new \Exception("Whoops!");
-@descr:@Route:/test
-@descr:@Method:GET
+	/**
+	* @Route(/test)
+	* @Method(GET)
+	*/
+	public function testException(){
+
+		throw new \Exception("Whoops!");
+	}	
+}

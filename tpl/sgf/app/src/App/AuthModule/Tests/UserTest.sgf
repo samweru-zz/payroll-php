@@ -1,21 +1,23 @@
+<?php
+namespace {{app}}\AuthModule\Tests;
 
-@ns:__APP__\AuthModule\Tests
-@import:Strukt\Core\Registry
-@import:PHPUnit\Framework\TestCase
-@class:UserTest
-@inherit:TestCase
+use Strukt\Core\Registry;
+use PHPUnit\Framework\TestCase;
 
-@method:setUp
-@body
-$this->core = Registry::getInstance()->get("core");
-@body
+class UserTest extends TestCase{
 
-@method:testDoAuthentication
-@body
-$username = "admin";
+	public function setUp(){
+	
+		$this->core = Registry::getInstance()->get("core");
+	}
+
+	public function testDoAuthentication(){
+
+		$username = "admin";
 		$password = "p@55w0rd";
 
 		$isSuccess = $this->core->get("au.ctr.User")->doAuthentication($username, $password);
 
 		$this->assertTrue($isSuccess);
-@body
+	}
+}

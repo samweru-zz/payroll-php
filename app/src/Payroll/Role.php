@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Role
  *
- * @ORM\Table(name="role")
+ * @ORM\Table(name="role", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_57698A6A5E237E06", columns={"name"})})
  * @ORM\Entity
  */
 class Role extends \App\Contract\Entity
@@ -29,9 +29,9 @@ class Role extends \App\Contract\Entity
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="descr", type="string", length=255, nullable=false)
+     * @ORM\Column(name="descr", type="text", length=0, nullable=true)
      */
     private $descr;
 
@@ -73,11 +73,11 @@ class Role extends \App\Contract\Entity
     /**
      * Set descr.
      *
-     * @param string $descr
+     * @param string|null $descr
      *
      * @return Role
      */
-    public function setDescr($descr)
+    public function setDescr($descr = null)
     {
         $this->descr = $descr;
 
@@ -87,7 +87,7 @@ class Role extends \App\Contract\Entity
     /**
      * Get descr.
      *
-     * @return string
+     * @return string|null
      */
     public function getDescr()
     {

@@ -1,11 +1,13 @@
-@ns:__APP__\AuthModule\Form
-@class:User
-@inherit:\Strukt\Contract\Form
+<?php
+namespace {{app}}\AuthModule\Form;
 
-@method:protected>validation
-@body
-$service = $this->getValidatorService();
+class User extends \Strukt\Contract\Form{
+
+	protected function validation(){
+
+		$service = $this->getValidatorService();
 
 		$this->setMessage("username", $service->getNew($this->get("username"))->isNotEmpty());
 		$this->setMessage("password", $service->getNew($this->get("password"))->isNotEmpty());
-@body
+	}
+}

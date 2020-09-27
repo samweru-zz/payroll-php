@@ -47,7 +47,7 @@ class Relief extends \App\Contract\Entity
      *
      * @ORM\Column(name="active", type="boolean", nullable=false, options={"default"="1"})
      */
-    private $active = '1';
+    private $active = true;
 
 
     /**

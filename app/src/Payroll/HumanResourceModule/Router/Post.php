@@ -23,11 +23,10 @@ class Post extends \Strukt\Contract\Router{
 
     $posts = $this->get("hr.ctr.Post")->all();
 
-    // return self::json(array("page"=>1,
-    //                     "rows"=>$lsPosts,
-    //                     "total"=>count($lsPosts)));
+    foreach($posts as $post)
+      $rsPosts[] = $post->toArray();
 
-    return self::json($posts);
+    return self::json($rsPosts);
   }
 
   /**
@@ -36,8 +35,8 @@ class Post extends \Strukt\Contract\Router{
   */
   public function find($id){
 
-    $post = $this->get("hr.ctr.Post")->find($id);
-    $depts = $this->get("hr.ctr.Dept")->ls();
+    $post = $this->get("hr.ctr.Post")->getById($id);
+    $depts = $this->get("hr.ctr.Department")->ls();
 
     return self::json(array(
 

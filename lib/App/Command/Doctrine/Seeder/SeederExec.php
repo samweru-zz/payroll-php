@@ -24,7 +24,7 @@ class SeederExec extends \Strukt\Console\Command{
 
 	public function execute(Input $in, Output $out){
 
-		$registry = Registry::getInstance();
+		$registry = Registry::getSingleton();
 
 		$conn = $registry->get("app.em")->getConnection();
 
@@ -43,10 +43,10 @@ class SeederExec extends \Strukt\Console\Command{
 			}, explode("_", $name)));
 
 			// $seeders = glob(sprintf("database/seeder/Seed/%s*", $name));
-			$seeders = glob(sprintf("%s/%s*", Env::get("seeder_dir"), $name));
+			$seeders = glob(sprintf("%s/%s*.php", Env::get("seeder_dir"), $name));
 		}
 		else
-			$seeders = glob(sprintf("%s/*", Env::get("seeder_dir")));
+			$seeders = glob(sprintf("%s/*.php", Env::get("seeder_dir")));
 
 		foreach($seeders as $seeder){
 
@@ -69,15 +69,18 @@ class SeederExec extends \Strukt\Console\Command{
 
 			foreach($files as $ver=>$cls){
 
-				$reflCls = new \ReflectionClass(sprintf("%s%s", $cls, $ver));
-				$seeder = $reflCls->newInstance();
+				if(!preg_match("/.*_.*/", $cls)){ //Ignore files with underscore
 
-				if($action == "up")
-					$seeder->up($conn);
-				elseif($action == "down")
-					$seeder->down($conn);
-				else
-					throw new \Exception(sprintf("Invalid action: %s!", $action));		
+					$reflCls = new \ReflectionClass(sprintf("%s%s", $cls, $ver));
+					$seeder = $reflCls->newInstance();
+
+					if($action == "up")
+						$seeder->up($conn);
+					elseif($action == "down")
+						$seeder->down($conn);
+					else
+						throw new \Exception(sprintf("Invalid action: %s!", $action));
+				}		
 			}
 		}
 		else throw new \Exception(sprintf("%s seeder(s) not found!", ucfirst($name)));

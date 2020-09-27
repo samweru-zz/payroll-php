@@ -2,10 +2,7 @@
 
 namespace Payroll\PaymentModule\Router;
 
-use Payroll\PaymentModule\Controller\Benefit as BenefitC;
-use Payroll\PaymentModule\Transformer\Benefit as BenefitT;
-
-class Benefit extends \App\Data\Router{
+class Benefit extends \Strukt\Contract\Router{
 
 	/**
 	* @Route(/benefit/all)
@@ -13,11 +10,9 @@ class Benefit extends \App\Data\Router{
 	*/
 	public function findAll(){
 
-		$lsBenefit = BenefitT::rsToList(BenefitC::all());
+		$benefits = $this->get("pa.ctr.Benefit")->all();
 
-     	return self::json(array("page"=>1,
-                        	"rows"=>$lsBenefit,
-                       		"total"=>count($lsBenefit)));
+     	return self::json($benefits);
 	}
 
 	/**
@@ -26,7 +21,7 @@ class Benefit extends \App\Data\Router{
 	*/
 	public function findOne($id){
 
-		$tBenefit = BenefitT::fromEntity(BenefitC::getById($id));
+		$benefit = $this->get("pa.ctr.Benefit")::getById($id);
 
      	return self::json($tBenefit);
 	}

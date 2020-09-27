@@ -15,14 +15,14 @@ class Department extends \Strukt\Contract\Controller{
 
 	public function all(){
 
-     	$depts = $this->da()->repo('hr.mdl.Department')->findAll();
+     	$depts = $this->da()->repo('Department')->findAll();
 
      	return $depts;
 	}
 
 	public function getById($id){
 
-     	$dept = $this->da()->find("hr.mdl.Department", $id);
+     	$dept = $this->da()->find("Department", $id);
 
      	return $dept;
 	}

@@ -1,5 +1,7 @@
-@ns:__APP__\AuthModule
-@class:__APP__AuthModule
-@inherit:\Strukt\Contract\Module
+<?php
+namespace {{app}}\AuthModule;
 
-@param:protected>alias="Au"
+class {{app}}AuthModule extends \Strukt\Contract\Module{
+
+	protected $alias="Au";
+}

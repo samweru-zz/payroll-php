@@ -3,7 +3,7 @@
 namespace App\Service\Seeder;
 
 use Strukt\Fs;
-use Strukt\Util\Json;
+use Strukt\Type\Json as JsonUtil;
 use Strukt\Contract\AbstractCore;
 
 class Json extends AbstractCore{
@@ -26,7 +26,7 @@ class Json extends AbstractCore{
 		if(empty($rawContent))
 			throw new \Exception(sprintf("File [%s] is empty!", $fileName));
 
-		if(!Json::isJson($rawContent))
+		if(!JsonUtil::isJson($rawContent))
 			throw new \Exception("Invalid JSON content!");
 
 		$content = json_decode($rawContent, 1);

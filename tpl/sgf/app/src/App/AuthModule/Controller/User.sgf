@@ -1,12 +1,22 @@
-@ns:__APP__\AuthModule\Controller
-@class:User
-@inherit:\Strukt\Contract\Controller
+<?php
+namespace {{app}}\AuthModule\Controller;
 
-@method:find@param:id
-@body:return "Couldn't find User:[$id] - AuthModule\Controller\User::find Not Yet Implemented!";
+class User extends \Strukt\Contract\Controller{
 
-@method:getAll
-@body:return "AuthModule\Controller\User::getAll Not Yet Implemented!";
+	public function find($id){
 
-@method:doAuthentication@param:username|password
-@body:return true;
+		return "Couldn't find User:[id] - AuthModule\Controller\User::find Not Yet Implemented!";
+	}
+
+	public function getAll(){
+
+		return "AuthModule\Controller\User::getAll Not Yet Implemented!";
+	}
+
+	public function doAuthentication($username, $password){
+
+		$user = $this->get("User", array($username, $password));
+
+		return $user->getUsername() == "admin" && $user->getPassword() == sha1("p@55w0rd");
+	}
+}

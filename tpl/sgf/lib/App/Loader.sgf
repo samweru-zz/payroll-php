@@ -1,33 +1,37 @@
-@ns:App
-@import:Strukt\Router\Kernel as RouterKernel;
-@class:Loader
-@descr
-	Application Loader Class
+<?php
+namespace App;
 
-	WARNING: THIS FILE IS AUTO-GENERATED. 
-			   DO NOT ADD ANYTHING BECAUSE 
-			   IT WILL BE OVERWRITTEN
+use Strukt\Router\Kernel as RouterKernel;
 
-	@author Moderator <pitsolu@gmail.com>
-@descr
+/**
+*	Application Loader Class
+*
+*	WARNING: THIS FILE IS AUTO-GENERATED. 
+*			   DO NOT ADD ANYTHING BECAUSE 
+*			   IT WILL BE OVERWRITTEN
+*
+*	@author Moderator <pitsolu@gmail.com>
+*/
+class Loader{
 
-@param:private>app#Strukt\Application
+	private $app;
 
-@method:__construct@param:router#RouterKernel=null
-@body
-$this->app = new \Strukt\Application($router);
-		%s
+	/**
+	* Constructor
+	*	
+	* Initialize Strukt Framework
+	*/
+	public function __construct(RouterKernel $router=null){
 
-@body
-@descr
-	
-	Constructor
-	
-	Initialize Strukt Framework
-@descr
+		$this->app = new \Strukt\Application($router);
+		{{packages}}
+	}
 
-@method:getApp#Strukt\Application
-@body
-return $this->app;
-@body
-@descr:Getter for Strukt Application
+	/**
+	* Getter for Strukt Application
+	*/
+	public function getApp():\Strukt\Application{
+
+		return $this->app;
+	}
+}

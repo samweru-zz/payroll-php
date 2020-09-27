@@ -38,7 +38,7 @@ class MigrateExec extends \Strukt\Console\Command{
 
 		try{
 
-			$registry = Registry::getInstance();
+			$registry = Registry::getSingleton();
 
 			$em = $registry->get("app.em");
 
@@ -79,8 +79,8 @@ class MigrateExec extends \Strukt\Console\Command{
 
 	            foreach ($executedUnavailableMigrations as $executedUnavailableMigration) {
 
-	                $out->add(sprintf(Color::write("yellow","    >> %s (").Color::write("%s)"),
-	                    $configuration->getDateTime($executedUnavailableMigration),
+	                $out->add(sprintf(Color::write("yellow","    >> %s (").Color::write("yellow", "%s)"),
+	                    $conf->getDateTime($executedUnavailableMigration),
 	                    $executedUnavailableMigration
 	                ));
 	            }

@@ -4,12 +4,17 @@ namespace App\Provider;
 
 use Monolog\Logger as Monolog;
 use Monolog\Handler\StreamHandler;
-use Strukt\Event\Event;
+use Strukt\Event;
 use Strukt\Contract\AbstractProvider;
 use Strukt\Contract\ProviderInterface;
 use Strukt\Env;
 
 class Logger extends AbstractProvider implements ProviderInterface{ 
+
+	public function __construct(){
+
+		//
+	}
 
 	public function register(){
 

@@ -159,7 +159,7 @@ class Employee extends \App\Contract\Entity
      *
      * @ORM\Column(name="active", type="boolean", nullable=true, options={"default"="1"})
      */
-    private $active = '1';
+    private $active = true;
 
     /**
      * @var \Payroll\Post
